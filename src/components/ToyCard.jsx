@@ -21,7 +21,7 @@ function ToyCard({toy, deleteToy, updatedLikes}) {
     fetch (`http://localhost:3001/toys/${id}`,{
       method : "PATCH",
       headers : {"Content-Type" : "application/json"},
-      body : JSON.stringify({likes : likes + 1})
+      body : JSON.stringify({likes : likes + 1}) 
     })
     .then(r=>{
       if (!r.ok){throw new Error("Cannot like toy")}
