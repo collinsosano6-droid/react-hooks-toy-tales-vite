@@ -8,7 +8,7 @@ function App() {
   const [showForm, setShowForm] = useState(false);
   const [toys, setToys] = useState([])
 
-  //function to fetch toy data from API
+  //function to fetch toy data from API ----READ
   function loadToys(){
     fetch ('http://localhost:3001/toys')
     .then (r=>{
@@ -23,8 +23,13 @@ function App() {
     loadToys()
   },[])
 
-  //function to add new toy from backend via props
+  //function to add new toy from backend via props ----CREATE
   const addNewToy = newToy => setToys(previousToys => [...previousToys, newToy])
+
+  //function to delete a toy (donate) ----DELETE
+    const deleteToy = deletedToyId => setToys(previousToys => 
+      previousToys.filter(toy => toy.id !== deletedToyId))
+
   
 
 
@@ -40,7 +45,7 @@ function App() {
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer toys={toys}/>
+      <ToyContainer toys={toys} deleteToy={deleteToy}/>
     </>
   );
 }
