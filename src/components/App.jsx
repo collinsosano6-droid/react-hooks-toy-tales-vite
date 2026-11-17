@@ -30,10 +30,13 @@ function App() {
     const deleteToy = deletedToyId => setToys(previousToys => 
       previousToys.filter(toy => toy.id !== deletedToyId))
 
-  
+  //function to update a toy`s likes -----PATCH
+  const updatedLikes = updateToy => setToys(previousToys =>
+    previousToys.map(toy => toy.id === updateToy.id ? updateToy : toy)
+  )
 
 
-
+//function to handleClick
   function handleClick() {
     setShowForm((showForm) => !showForm);
   }
@@ -45,7 +48,7 @@ function App() {
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer toys={toys} deleteToy={deleteToy}/>
+      <ToyContainer toys={toys} deleteToy={deleteToy} updatedLikes={updatedLikes}/>
     </>
   );
 }
