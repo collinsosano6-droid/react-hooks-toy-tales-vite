@@ -23,6 +23,12 @@ function App() {
     loadToys()
   },[])
 
+  //function to add new toy from backend via props
+  const addNewToy = newToy => setToys(previousToys => [...previousToys, newToy])
+  
+
+
+
   function handleClick() {
     setShowForm((showForm) => !showForm);
   }
@@ -30,7 +36,7 @@ function App() {
   return (
     <>
       <Header />
-      {showForm ? <ToyForm /> : null}
+      {showForm ? <ToyForm addNewToy= {addNewToy} /> : null}
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
