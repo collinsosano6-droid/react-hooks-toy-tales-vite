@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Header from "./Header";
 import ToyForm from "./ToyForm";
@@ -6,6 +6,22 @@ import ToyContainer from "./ToyContainer";
 
 function App() {
   const [showForm, setShowForm] = useState(false);
+  const [toys, setToys] = useState([])
+
+  //function to fetch toy data from API
+  function loadToys(){
+    fetch ('http://localhost:3001/toys')
+    .then (r=>{
+      if(!r.ok){throw new Error('Failed to fetch toys', Error)}
+      return r.json()
+    })
+    .then (data => setToys(data))
+    . catch (err=> console.log(err))
+  }
+
+  useEffect(()=>{
+    loadToys()
+  },[])
 
   function handleClick() {
     setShowForm((showForm) => !showForm);
@@ -18,7 +34,7 @@ function App() {
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer />
+      <ToyContainer toys={toys}/>
     </>
   );
 }
